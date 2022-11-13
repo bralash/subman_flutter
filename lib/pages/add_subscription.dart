@@ -29,13 +29,30 @@ class _AddSubscriptionState extends State<AddSubscription> {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.all(30),
-          child: Column(
-            children: [],
-          ),
-        )
-      ),
+          child: Container(
+        margin: EdgeInsets.all(30),
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                fillColor: Colors.grey[300],
+                filled: true,
+                hintText: 'Search subscription',
+                contentPadding: EdgeInsets.symmetric(horizontal: 19, vertical: 16)
+              ),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }

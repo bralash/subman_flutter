@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import './add_subscription.dart';
+import './settings.dart';
 
 class Subscriptions extends StatefulWidget {
   const Subscriptions({super.key});
@@ -32,10 +33,22 @@ class _SubscriptionsState extends State<Subscriptions> {
                     ),
                   ),
                   SizedBox(width: 30),
-                  Icon(
-                    Icons.settings_outlined,
-                    size: 24,
-                    color: Colors.grey[600],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Settings();
+                          },
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      Icons.settings_outlined,
+                      size: 24,
+                      color: Colors.grey[600],
+                    ),
                   ),
                   SizedBox(width: 15),
                   GestureDetector(
