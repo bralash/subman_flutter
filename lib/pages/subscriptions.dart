@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:subman/auth_service.dart';
+import './add_subscription.dart';
 
 class Subscriptions extends StatefulWidget {
   const Subscriptions({super.key});
@@ -40,10 +38,22 @@ class _SubscriptionsState extends State<Subscriptions> {
                     color: Colors.grey[600],
                   ),
                   SizedBox(width: 15),
-                  Icon(
-                    Icons.add,
-                    size: 24,
-                    color: Colors.blue[900],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return AddSubscription();
+                          },
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      Icons.add,
+                      size: 24,
+                      color: Colors.blue[900],
+                    ),
                   ),
                 ],
               ),
@@ -73,7 +83,16 @@ class _SubscriptionsState extends State<Subscriptions> {
                     ),
                     SizedBox(height: 40),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return AddSubscription();
+                            },
+                          ),
+                        );
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 22),
                         width: double.infinity,
