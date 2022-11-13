@@ -14,6 +14,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Future signIn() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    await AuthService().signInWithGoogle();
+
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               SocialLoginButton(
                 buttonText: 'Continue with Google',
                 buttonIcon: 'assets/google.png',
-                loginService: AuthService().signInWithGoogle,
+                loginService: signIn,
               ),
               SizedBox(height: 10),
               SocialLoginButton(
