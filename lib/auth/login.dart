@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:subman/UI/social_login_button.dart';
+import 'package:subman/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -39,10 +41,11 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     'Get Started',
                     style: TextStyle(
-                        fontFamily: 'SFPro',
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[900]),
+                      fontFamily: 'SFPro',
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[900],
+                    ),
                   ),
                 ],
               ),
@@ -50,70 +53,23 @@ class _LoginPageState extends State<LoginPage> {
               Text(
                 'Create an account or sign in by choosing an option below',
                 style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'SFPro',
-                    fontWeight: FontWeight.normal,
-                    color: Colors.grey[700]),
+                  fontSize: 16,
+                  fontFamily: 'SFPro',
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey[700],
+                ),
               ),
               SizedBox(height: 120),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(),
-                      width: 29,
-                      height: 29,
-                      child: Image(
-                        image: AssetImage('assets/google.png'),
-                      ),
-                    ),
-                    SizedBox(width: 50),
-                    Text(
-                      'Continue with Google',
-                      style: TextStyle(
-                        fontFamily: 'SFPro',
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.grey[700],
-                      ),
-                    ),
-                  ],
-                ),
+              SocialLoginButton(
+                buttonText: 'Continue with Google',
+                buttonIcon: 'assets/google.png',
+                loginService: AuthService().signInWithGoogle,
               ),
               SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(),
-                      width: 29,
-                      height: 29,
-                      child: Image(
-                        image: AssetImage('assets/apple.png'),
-                      ),
-                    ),
-                    SizedBox(width: 50),
-                    Text(
-                      'Continue with Apple',
-                      style: TextStyle(
-                        fontFamily: 'SFPro',
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.grey[700],
-                      ),
-                    ),
-                  ],
-                ),
+              SocialLoginButton(
+                buttonText: 'Continue with Apple',
+                buttonIcon: 'assets/apple.png',
+                loginService: () {},
               ),
             ],
           ),
