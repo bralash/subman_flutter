@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import '../auth_service.dart';
+import '../UI/settings_item.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -43,83 +43,26 @@ class _SettingsState extends State<Settings> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
+                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          height: 37,
-                          width: 37,
-                          decoration: BoxDecoration(
-                            color: Colors.black87,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        SizedBox(width: 17),
-                        Text(
-                          'Currency',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+                    SettingsItem(
+                      settingsColor: Colors.black87,
+                      settingsText: 'Currency',
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Container(
-                          height: 37,
-                          width: 37,
-                          decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        SizedBox(width: 17),
-                        Text(
-                          'Archived subscriptions',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                      ],
+                    SettingsItem(
+                      settingsColor: Colors.amber,
+                      settingsText: 'Archived subscriptions',
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Container(
-                          height: 37,
-                          width: 37,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        SizedBox(width: 17),
-                        Text(
-                          'Categories',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                      ],
+                    SettingsItem(
+                      settingsColor: Colors.grey,
+                      settingsText: 'Categories',
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Container(
-                          height: 37,
-                          width: 37,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        SizedBox(width: 17),
-                        Text(
-                          'Export as CSV',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+                    SettingsItem(
+                      settingsColor: Colors.green,
+                      settingsText: 'Export as CSV',
                     ),
                   ],
                 ),
@@ -138,28 +81,11 @@ class _SettingsState extends State<Settings> {
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 37,
-                      width: 37,
-                      decoration: BoxDecoration(
-                        color: Colors.red[400],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    SizedBox(width: 17),
-                    Text(
-                      'Export as CSV',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
+                child: SettingsItem(
+                  settingsColor: (Colors.red[400])!,
+                  settingsText: 'Touch ID',
                 ),
               ),
-
               SizedBox(height: 25),
               Text(
                 'SUPPORT',
@@ -174,25 +100,32 @@ class _SettingsState extends State<Settings> {
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 37,
-                      width: 37,
-                      decoration: BoxDecoration(
-                        color: Colors.amber[400],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                child: SettingsItem(
+                      settingsColor: Colors.amber.shade400,
+                      settingsText: 'Rate app',
                     ),
-                    SizedBox(width: 17),
-                    Text(
-                      'Rate app',
-                      style: TextStyle(
+              ),
+              SizedBox(height: 35),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    AuthService().signOut();
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return LoginPage();
+                    //     },
+                    //   ),
+                    // );
+                  },
+                  child: Text(
+                    'Log out',
+                    style: TextStyle(
                         fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
                 ),
               ),
             ],
