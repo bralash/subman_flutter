@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:subman/UI/empty_subscription.dart';
 import './add_subscription.dart';
 import './settings.dart';
+import '../UI/subscription_item.dart';
+import '../data.dart';
 
 class Subscriptions extends StatefulWidget {
   const Subscriptions({super.key});
@@ -19,6 +22,7 @@ class _SubscriptionsState extends State<Subscriptions> {
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 30, vertical: 60),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 // ignore: prefer_const_literals_to_create_immutables
@@ -34,7 +38,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                   ),
                   SizedBox(width: 30),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -70,64 +74,44 @@ class _SubscriptionsState extends State<Subscriptions> {
                   ),
                 ],
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Text(
-                      'Its lonely here',
-                      style: TextStyle(
-                        fontFamily: 'SFPro',
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
+              SizedBox(
+                height: 20,
+              ),
+
+              // When list is not empty
+              TextField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                  prefixIcon: Icon(Icons.search),
+                  prefixIconColor: Colors.grey[500],
+                  border: OutlineInputBorder(),
+                  hintText: "Search",
+                  fillColor: Colors.grey[200],
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(width: 0, color: Colors.transparent),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 0,
                     ),
-                    Text(
-                      'Subscriptions you add will show here',
-                      style: TextStyle(
-                        fontFamily: 'SFPro',
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.grey[700],
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return AddSubscription();
-                            },
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 22),
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.blue[900],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          'Add subscription',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontFamily: 'SFPro',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              ...List.generate(
+                subscriptions.length,
+                (index) => SubscriptionItem(
+                  logo: subscriptions[index]['logo'],
+                  service: subscriptions[index]['service'],
+                  cost: subscriptions[index]['cost'],
+                  color: subscriptions[index]['color'],
+                ),
+              ),
+              // EmptySubscription(),
             ],
           ),
         ),
