@@ -12,6 +12,11 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  Future<void> signout() async {
+    AuthService().signOut();
+    Navigator.of(context, rootNavigator: true).pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,23 +106,15 @@ class _SettingsState extends State<Settings> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: SettingsItem(
-                      settingsColor: Colors.amber.shade400,
-                      settingsText: 'Rate app',
-                    ),
+                  settingsColor: Colors.amber.shade400,
+                  settingsText: 'Rate app',
+                ),
               ),
               SizedBox(height: 35),
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    AuthService().signOut();
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) {
-                    //       return LoginPage();
-                    //     },
-                    //   ),
-                    // );
+                    signout();
                   },
                   child: Text(
                     'Log out',

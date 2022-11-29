@@ -32,7 +32,7 @@ class SocialLoginButton extends StatelessWidget {
               loginService();
             },
             child: Text(
-              'Continue with Google',
+              buttonText,
               style: TextStyle(
                 fontFamily: 'SFPro',
                 color: Colors.grey[700],

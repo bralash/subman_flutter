@@ -41,7 +41,7 @@ List<Map<String, dynamic>> subscriptions = [
     "logo": "assets/logos/netflix.png",
     "description": "Payment for monthly premium subscription",
     "color": Color(0xFFe50a14),
-    "cost": 25.00,
+    "cost": 12.00,
     "billDate": "23-10-2021",
     "category": "Entertainment",
     "cycle": "Monthly",
