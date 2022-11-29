@@ -80,6 +80,12 @@ flutter:
     - assets/logos/apple.png
     - assets/logos/icloud.png
     - assets/logos/netflix.png
+    - assets/settings/box.png
+    - assets/settings/file.png
+    - assets/settings/fingerprint.png
+    - assets/settings/money.png
+    - assets/settings/star.png
+    - assets/settings/categories.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

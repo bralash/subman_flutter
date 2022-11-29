@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:subman/constants.dart';
 import '../auth_service.dart';
 import '../UI/settings_item.dart';
 
@@ -36,96 +37,110 @@ class _SettingsState extends State<Settings> {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.all(30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    SettingsItem(
-                      settingsColor: Colors.black87,
-                      settingsText: 'Currency',
-                    ),
-                    SizedBox(height: 20),
-                    SettingsItem(
-                      settingsColor: Colors.amber,
-                      settingsText: 'Archived subscriptions',
-                    ),
-                    SizedBox(height: 20),
-                    SettingsItem(
-                      settingsColor: Colors.grey,
-                      settingsText: 'Categories',
-                    ),
-                    SizedBox(height: 20),
-                    SettingsItem(
-                      settingsColor: Colors.green,
-                      settingsText: 'Export as CSV',
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 25),
-              Text(
-                'SECURITY',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                padding: EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: SettingsItem(
-                  settingsColor: (Colors.red[400])!,
-                  settingsText: 'Touch ID',
-                ),
-              ),
-              SizedBox(height: 25),
-              Text(
-                'SUPPORT',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                padding: EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: SettingsItem(
-                  settingsColor: Colors.amber.shade400,
-                  settingsText: 'Rate app',
-                ),
-              ),
-              SizedBox(height: 35),
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    signout();
-                  },
-                  child: Text(
-                    'Log out',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red),
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      SettingsItem(
+                        settingsColor: kBlack,
+                        settingsText: 'Currency',
+                        border: true,
+                        settingsIcon: "assets/settings/money.png",
+                      ),
+                      SizedBox(height: 20),
+                      SettingsItem(
+                        settingsColor: kDarkAmber,
+                        settingsText: 'Archived subscriptions',
+                        border: true,
+                        settingsIcon: "assets/settings/box.png",
+                      ),
+                      SizedBox(height: 20),
+                      SettingsItem(
+                        settingsColor: kDarkGrey,
+                        settingsText: 'Categories',
+                        border: true,
+                        settingsIcon: "assets/settings/categories.png",
+                      ),
+                      SizedBox(height: 20),
+                      SettingsItem(
+                        settingsColor: kGreen,
+                        settingsText: 'Export as CSV',
+                        border: false,
+                        settingsIcon: "assets/settings/file.png",
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 25),
+                Text(
+                  'SECURITY',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SettingsItem(
+                    settingsColor: kRed,
+                    settingsText: 'Touch ID',
+                    border: false,
+                    settingsIcon: "assets/settings/fingerprint.png",
+                  ),
+                ),
+                SizedBox(height: 25),
+                Text(
+                  'SUPPORT',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SettingsItem(
+                    settingsColor: kLightAmber,
+                    settingsText: 'Rate app',
+                    border: false,
+                    settingsIcon: "assets/settings/star.png",
+                  ),
+                ),
+                SizedBox(height: 35),
+                Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      signout();
+                    },
+                    child: Text(
+                      'Log out',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
