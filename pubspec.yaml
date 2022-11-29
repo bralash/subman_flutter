@@ -76,10 +76,17 @@ flutter:
     - assets/google.png
     - assets/logo.png
     - assets/apple.png
+
     - assets/logos/spotify.png
     - assets/logos/apple.png
     - assets/logos/icloud.png
     - assets/logos/netflix.png
+
+    - assets/logos/spotify_alt.png
+    - assets/logos/apple_alt.png
+    - assets/logos/icloud_alt.png
+    - assets/logos/netflix_alt.png
+
     - assets/settings/box.png
     - assets/settings/file.png
     - assets/settings/fingerprint.png

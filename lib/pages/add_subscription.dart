@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:subman/data.dart';
+
+import '../UI/subscription_addition_item.dart';
+import '../constants.dart';
 
 class AddSubscription extends StatefulWidget {
   const AddSubscription({super.key});
@@ -35,19 +39,31 @@ class _AddSubscriptionState extends State<AddSubscription> {
           children: [
             TextField(
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
                 prefixIcon: Icon(Icons.search),
+                prefixIconColor: Colors.grey[500],
+                border: OutlineInputBorder(),
+                hintText: "Search",
+                fillColor: Colors.grey[200],
+                filled: true,
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(width: 0, color: Colors.transparent),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                  ),
                 ),
-                fillColor: Colors.grey[300],
-                filled: true,
-                hintText: 'Search subscription',
-                contentPadding: EdgeInsets.symmetric(horizontal: 19, vertical: 16)
+              ),
+            ),
+            SizedBox(height: 30),
+            ...List.generate(
+              subscriptions.length,
+              (index) => SubscriptionAdditionItem(
+                logo: addSubscriptions[index]['logo'],
+                service: addSubscriptions[index]['service'],
+                serviceColor: addSubscriptions[index]['color'],
               ),
             ),
           ],
