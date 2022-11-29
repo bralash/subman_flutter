@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-// import 'package:subman/UI/empty_subscription.dart';
+import 'package:subman/UI/subscription_list.dart';
+import 'package:subman/UI/empty_subscription.dart';
 import './add_subscription.dart';
 import './settings.dart';
 import '../UI/subscription_item.dart';
@@ -77,41 +78,8 @@ class _SubscriptionsState extends State<Subscriptions> {
               SizedBox(
                 height: 20,
               ),
-
-              // When list is not empty
-              TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  prefixIcon: Icon(Icons.search),
-                  prefixIconColor: Colors.grey[500],
-                  border: OutlineInputBorder(),
-                  hintText: "Search",
-                  fillColor: Colors.grey[200],
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(width: 0, color: Colors.transparent),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 0,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ...List.generate(
-                subscriptions.length,
-                (index) => SubscriptionItem(
-                  logo: subscriptions[index]['logo'],
-                  service: subscriptions[index]['service'],
-                  cost: subscriptions[index]['cost'],
-                  color: subscriptions[index]['color'],
-                ),
-              ),
-              // EmptySubscription(),
+  
+              subscriptions.isEmpty ? EmptySubscription() : SubscriptionList(),
             ],
           ),
         ),
@@ -119,3 +87,4 @@ class _SubscriptionsState extends State<Subscriptions> {
     );
   }
 }
+
