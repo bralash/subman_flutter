@@ -26,7 +26,7 @@ class _SubscriptionAdditionItemState extends State<SubscriptionAdditionItem> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SubscriptionForm(),
+          builder: (context) => SubscriptionForm(logo: widget.logo, service: widget.service, serviceColor: widget.serviceColor,),
         ));
   }
 

@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:subman/constants.dart';
 
 class SubscriptionForm extends StatefulWidget {
-  const SubscriptionForm({super.key});
+  const SubscriptionForm(
+      {super.key, required this.logo, required this.service, required this.serviceColor});
+
+  final String logo, service;
+  final Color serviceColor;
 
   @override
   State<SubscriptionForm> createState() => _SubscriptionFormState();
@@ -53,14 +57,14 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/logos/spotify_alt.png",
+                    widget.logo,
                     width: 45,
                   ),
                   SizedBox(width: 12),
                   Text(
-                    "Spotify",
+                    widget.service,
                     style: TextStyle(
-                        color: kGreen,
+                        color: widget.serviceColor,
                         fontFamily: "SFPro",
                         fontSize: 23,
                         fontWeight: FontWeight.bold),
@@ -109,7 +113,6 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
                   ),
                 ),
               ),
-
               SizedBox(height: 40),
               TextField(
                 decoration: InputDecoration(
