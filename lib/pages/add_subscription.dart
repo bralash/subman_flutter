@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:subman/data.dart';
 
 import '../UI/subscription_addition_item.dart';
-import '../constants.dart';
 
 class AddSubscription extends StatefulWidget {
   const AddSubscription({super.key});
@@ -21,6 +20,7 @@ class _AddSubscriptionState extends State<AddSubscription> {
         elevation: 0,
         iconTheme: IconThemeData(
           color: Colors.blue[900],
+          size: 16,
         ),
         title: const Text(
           'Add Subscription',

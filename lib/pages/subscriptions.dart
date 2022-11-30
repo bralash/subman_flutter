@@ -5,7 +5,6 @@ import 'package:subman/UI/subscription_list.dart';
 import 'package:subman/UI/empty_subscription.dart';
 import './add_subscription.dart';
 import './settings.dart';
-import '../UI/subscription_item.dart';
 import '../data.dart';
 
 class Subscriptions extends StatefulWidget {
@@ -78,7 +77,7 @@ class _SubscriptionsState extends State<Subscriptions> {
               SizedBox(
                 height: 20,
               ),
-  
+
               subscriptions.isEmpty ? EmptySubscription() : SubscriptionList(),
             ],
           ),
