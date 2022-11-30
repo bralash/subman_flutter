@@ -86,6 +86,7 @@ flutter:
     - assets/logos/apple_alt.png
     - assets/logos/icloud_alt.png
     - assets/logos/netflix_alt.png
+    - assets/logos/other.png
 
     - assets/settings/box.png
     - assets/settings/file.png

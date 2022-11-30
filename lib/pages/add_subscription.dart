@@ -59,7 +59,7 @@ class _AddSubscriptionState extends State<AddSubscription> {
             ),
             SizedBox(height: 30),
             ...List.generate(
-              subscriptions.length,
+              addSubscriptions.length,
               (index) => SubscriptionAdditionItem(
                 logo: addSubscriptions[index]['logo'],
                 service: addSubscriptions[index]['service'],
