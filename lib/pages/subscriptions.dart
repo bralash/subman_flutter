@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:subman/UI/subscription_item.dart';
 import 'package:subman/UI/empty_subscription.dart';
+import 'package:subman/pages/subscription_details.dart';
 import './add_subscription.dart';
 import './settings.dart';
 
@@ -105,12 +106,35 @@ class _SubscriptionsState extends State<Subscriptions> {
                         snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map<String, dynamic> data =
                           document.data()! as Map<String, dynamic>;
-                      return SubscriptionItem(
-                        logo: data['logo'],
-                        service: data['service'],
-                        cost: double.parse(data['cost']),
-                        color: Color(data['serviceColor']).withOpacity(1),
-                        billDate: DateFormat("yMMMd").parse(data['billDate'],),
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SubscriptionDetails(
+                                  id: document.id,
+                                  logo: data['logo'],
+                                  service: data['service'],
+                                  serviceColor: Color(data['serviceColor'])
+                                      .withOpacity(1),
+                                  billDate: data['billDate'],
+                                  cost: data['cost'],
+                                  description: data['description'],
+                                  category: data['category'],
+                                  reminder: data['reminder'],
+                                  cycle: data['cycle'],
+                                ),
+                              ));
+                        },
+                        child: SubscriptionItem(
+                          logo: data['logo'],
+                          service: data['service'],
+                          cost: double.parse(data['cost']),
+                          color: Color(data['serviceColor']).withOpacity(1),
+                          billDate: DateFormat("yMMMd").parse(
+                            data['billDate'],
+                          ),
+                        ),
                       );
                     }).toList(),
                   );
