@@ -103,7 +103,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    widget.logo,
+                    "assets/logos/${widget.logo}.png",
                     width: 45,
                   ),
                   SizedBox(width: 12),

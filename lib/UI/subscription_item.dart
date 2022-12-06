@@ -17,6 +17,7 @@ class SubscriptionItem extends StatelessWidget {
   final double cost;
   final DateTime billDate;
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +49,7 @@ class SubscriptionItem extends StatelessWidget {
                 ),
               ),
               Text(
-                "${DateTime.now().difference(billDate).inDays}",
+                "Next bill date in ${DateTime(billDate.year, billDate.month + 1, billDate.day).difference(DateTime.now()).inDays} days",
                 style: TextStyle(
                   fontFamily: "SFPro",
                   fontWeight: FontWeight.normal,

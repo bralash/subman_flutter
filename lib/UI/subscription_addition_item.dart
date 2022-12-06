@@ -47,7 +47,7 @@ class _SubscriptionAdditionItemState extends State<SubscriptionAdditionItem> {
         child: Row(
           children: [
             Image.asset(
-              widget.logo,
+              "assets/logos/${widget.logo}.png",
               width: 30,
             ),
             SizedBox(

@@ -83,7 +83,7 @@ class _AddSubscriptionState extends State<AddSubscription> {
                         Map<String, dynamic> data =
                             document.data()! as Map<String, dynamic>;
                         return SubscriptionAdditionItem(
-                          logo: "assets/logos/${data['logo']}.png",
+                          logo: data['logo'],
                           service: data['service'],
                           serviceColor: Color(data['color']).withOpacity(1),
                         );
