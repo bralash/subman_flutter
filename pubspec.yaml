@@ -55,7 +55,7 @@ flutter_icons:
     image_path: "assets/icon/icon.png"
 
 
-  flutter_lints: ^2.0.0
+flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
