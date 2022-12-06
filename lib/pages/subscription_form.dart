@@ -1,11 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:subman/constants.dart';
+import 'package:intl/intl.dart';
+import 'package:subman/pages/subscriptions.dart';
 
 class SubscriptionForm extends StatefulWidget {
   const SubscriptionForm(
-      {super.key, required this.logo, required this.service, required this.serviceColor});
+      {super.key,
+      required this.logo,
+      required this.service,
+      required this.serviceColor});
 
   final String logo, service;
   final Color serviceColor;
@@ -15,6 +22,43 @@ class SubscriptionForm extends StatefulWidget {
 }
 
 class _SubscriptionFormState extends State<SubscriptionForm> {
+  final TextEditingController _costController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _billDateController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
+  final TextEditingController _cycleController = TextEditingController();
+  final TextEditingController _reminderController = TextEditingController();
+
+  void _saveSubscription() {
+    FirebaseFirestore.instance.collection("subscriptions").add({
+      "service": widget.service,
+      "logo": "assets/logos/${widget.service}.png",
+      "serviceColor": widget.serviceColor.value,
+      "cost": _costController.text,
+      "description": _descriptionController.text,
+      "billDate": _billDateController.text,
+      "category": _categoryController.text,
+      "cycle": _cycleController.text,
+      "reminder": _reminderController.text
+    });
+
+    _costController.clear();
+    _descriptionController.clear();
+    _billDateController.clear();
+    _categoryController.clear();
+    _cycleController.clear();
+    _reminderController.clear();
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Subscriptions()));
+  }
+
+  @override
+  void initState() {
+    _billDateController.text = "";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +79,9 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              _saveSubscription();
+            },
             child: Text(
               'Done',
               style: TextStyle(
@@ -73,6 +119,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
               ),
               SizedBox(height: 40),
               TextField(
+                controller: _costController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -94,6 +141,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: _descriptionController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -115,6 +163,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
               ),
               SizedBox(height: 40),
               TextField(
+                controller: _billDateController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -134,9 +183,29 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
                     ),
                   ),
                 ),
+                readOnly: true,
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2101));
+
+                  if (pickedDate != null) {
+                    String formattedDate =
+                        DateFormat.yMMMd('en_US').format(pickedDate);
+
+                    setState(() {
+                      _billDateController.text = formattedDate;
+                    });
+                  } else {
+                    // print("Date is not selected");
+                  }
+                },
               ),
               SizedBox(height: 10),
               TextField(
+                controller: _categoryController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -159,6 +228,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: _cycleController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -181,6 +251,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: _reminderController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 20),

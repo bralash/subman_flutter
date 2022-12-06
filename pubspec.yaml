@@ -48,6 +48,7 @@ dependencies:
   google_sign_in: ^5.4.2
   firebase_analytics: ^9.3.8
   the_apple_sign_in: ^1.1.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +88,8 @@ flutter:
     - assets/logos/icloud_alt.png
     - assets/logos/netflix_alt.png
     - assets/logos/other.png
+    - assets/logos/aws.png
+    - assets/logos/american-express.png
 
     - assets/settings/box.png
     - assets/settings/file.png

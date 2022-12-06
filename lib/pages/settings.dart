@@ -5,14 +5,14 @@ import 'package:subman/constants.dart';
 import '../auth_service.dart';
 import '../UI/settings_item.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({super.key});
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<SettingsPage> createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState extends State<SettingsPage> {
   Future<void> signout() async {
     AuthService().signOut();
     Navigator.of(context, rootNavigator: true).pop(context);

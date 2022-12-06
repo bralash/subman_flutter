@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:subman/data.dart';
 
@@ -13,6 +14,9 @@ class AddSubscription extends StatefulWidget {
 }
 
 class _AddSubscriptionState extends State<AddSubscription> {
+  final Stream<QuerySnapshot> _servicesStream =
+      FirebaseFirestore.instance.collection('services').snapshots();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,34 +41,54 @@ class _AddSubscriptionState extends State<AddSubscription> {
         margin: EdgeInsets.all(30),
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 10),
-                prefixIcon: Icon(Icons.search),
-                prefixIconColor: Colors.grey[500],
-                border: OutlineInputBorder(),
-                hintText: "Search",
-                fillColor: Colors.grey[200],
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 0, color: Colors.transparent),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 0,
-                  ),
-                ),
-              ),
-            ),
+            // TextField(
+            //   decoration: InputDecoration(
+            //     contentPadding: EdgeInsets.symmetric(vertical: 10),
+            //     prefixIcon: Icon(Icons.search),
+            //     prefixIconColor: Colors.grey[500],
+            //     border: OutlineInputBorder(),
+            //     hintText: "Search",
+            //     fillColor: Colors.grey[200],
+            //     filled: true,
+            //     enabledBorder: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(10),
+            //       borderSide: BorderSide(width: 0, color: Colors.transparent),
+            //     ),
+            //     focusedBorder: OutlineInputBorder(
+            //       borderSide: BorderSide(
+            //         width: 0,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SizedBox(height: 30),
-            ...List.generate(
-              addSubscriptions.length,
-              (index) => SubscriptionAdditionItem(
-                logo: addSubscriptions[index]['logo'],
-                service: addSubscriptions[index]['service'],
-                serviceColor: addSubscriptions[index]['color'],
-              ),
+            StreamBuilder<QuerySnapshot>(
+              stream: _servicesStream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Something went wrong');
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text('Loading...');
+                }
+
+                return ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  children:
+                      snapshot.data!.docs.map((DocumentSnapshot document) {
+                    Map<String, dynamic> data =
+                        document.data()! as Map<String, dynamic>;
+                    return SubscriptionAdditionItem(
+                      logo: "assets/logos/${data['logo']}",
+                      service: data['service'],
+                      serviceColor: Color(data['color']).withOpacity(1),
+                    );
+                  }).toList(),
+                );
+              },
             ),
           ],
         ),

@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:subman/UI/subscription_item.dart';
 import 'package:subman/UI/subscription_list.dart';
 import 'package:subman/UI/empty_subscription.dart';
 import './add_subscription.dart';
 import './settings.dart';
-import '../data.dart';
 
 class Subscriptions extends StatefulWidget {
   const Subscriptions({super.key});
@@ -15,6 +16,9 @@ class Subscriptions extends StatefulWidget {
 }
 
 class _SubscriptionsState extends State<Subscriptions> {
+  final Stream<QuerySnapshot> _subscriptionStream =
+      FirebaseFirestore.instance.collection("subscriptions").snapshots();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +32,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text(
+                    // Color(0xff016fd0).value.toString(),
                     'Subscriptions',
                     style: TextStyle(
                       fontFamily: 'SFPro',
@@ -43,7 +48,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return Settings();
+                            return SettingsPage();
                           },
                         ),
                       );
@@ -78,7 +83,40 @@ class _SubscriptionsState extends State<Subscriptions> {
                 height: 20,
               ),
 
-              subscriptions.isEmpty ? EmptySubscription() : SubscriptionList(),
+              StreamBuilder<QuerySnapshot>(
+                stream: _subscriptionStream,
+                builder: (BuildContext content,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (!snapshot.hasData) {
+                    return EmptySubscription();
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text('Loading...');
+                  }
+
+                  return ListView(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data()! as Map<String, dynamic>;
+                      return SubscriptionItem(
+                          logo: data['logo'],
+                          service: data['service'],
+                          cost: double.parse(data['cost']),
+                          color: Color(data['serviceColor']).withOpacity(1));
+                    }).toList(),
+                  );
+                },
+              ),
+
+              // subscriptions.isEmpty ? EmptySubscription() : SubscriptionList(),
             ],
           ),
         ),
@@ -86,4 +124,3 @@ class _SubscriptionsState extends State<Subscriptions> {
     );
   }
 }
-
