@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:subman/data.dart';
 
 import '../UI/subscription_addition_item.dart';
 
@@ -15,7 +14,7 @@ class AddSubscription extends StatefulWidget {
 
 class _AddSubscriptionState extends State<AddSubscription> {
   final Stream<QuerySnapshot> _servicesStream =
-      FirebaseFirestore.instance.collection('services').snapshots();
+      FirebaseFirestore.instance.collection('services').orderBy("service", descending: false).snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +81,7 @@ class _AddSubscriptionState extends State<AddSubscription> {
                     Map<String, dynamic> data =
                         document.data()! as Map<String, dynamic>;
                     return SubscriptionAdditionItem(
-                      logo: "assets/logos/${data['logo']}",
+                      logo: "assets/logos/${data['logo']}.png",
                       service: data['service'],
                       serviceColor: Color(data['color']).withOpacity(1),
                     );

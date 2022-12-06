@@ -27,7 +27,7 @@ class SubscriptionItem extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            logo,
+            "assets/logos/${logo}_alt.png",
             width: 30,
           ),
           SizedBox(width: 12),

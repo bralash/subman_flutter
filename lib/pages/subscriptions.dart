@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:subman/UI/subscription_item.dart';
-import 'package:subman/UI/subscription_list.dart';
 import 'package:subman/UI/empty_subscription.dart';
 import './add_subscription.dart';
 import './settings.dart';
@@ -32,8 +31,8 @@ class _SubscriptionsState extends State<Subscriptions> {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text(
-                    // Color(0xff016fd0).value.toString(),
-                    'Subscriptions',
+                    Color(0xFFe50a14).value.toString(),
+                    // 'Subscriptions',
                     style: TextStyle(
                       fontFamily: 'SFPro',
                       fontWeight: FontWeight.bold,
