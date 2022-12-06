@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:subman/UI/subscription_item.dart';
-import 'package:subman/data.dart';
+// import 'package:subman/UI/subscription_item.dart';
+// import 'package:subman/data.dart';
 
 class SubscriptionList extends StatelessWidget {
   const SubscriptionList({
