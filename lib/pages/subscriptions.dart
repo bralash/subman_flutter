@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:subman/UI/subscription_item.dart';
 import 'package:subman/UI/empty_subscription.dart';
 import './add_subscription.dart';
@@ -31,8 +32,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text(
-                    Color(0xFFe50a14).value.toString(),
-                    // 'Subscriptions',
+                    'Subscriptions',
                     style: TextStyle(
                       fontFamily: 'SFPro',
                       fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                     return Text('Something went wrong');
                   }
 
-                  if (!snapshot.hasData) {
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                     return EmptySubscription();
                   }
 
@@ -106,10 +106,12 @@ class _SubscriptionsState extends State<Subscriptions> {
                       Map<String, dynamic> data =
                           document.data()! as Map<String, dynamic>;
                       return SubscriptionItem(
-                          logo: data['logo'],
-                          service: data['service'],
-                          cost: double.parse(data['cost']),
-                          color: Color(data['serviceColor']).withOpacity(1));
+                        logo: data['logo'],
+                        service: data['service'],
+                        cost: double.parse(data['cost']),
+                        color: Color(data['serviceColor']).withOpacity(1),
+                        billDate: DateFormat("yMMMd").parse(data['billDate'],),
+                      );
                     }).toList(),
                   );
                 },

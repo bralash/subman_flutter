@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../UI/subscription_addition_item.dart';
 
 class AddSubscription extends StatefulWidget {
@@ -13,8 +12,10 @@ class AddSubscription extends StatefulWidget {
 }
 
 class _AddSubscriptionState extends State<AddSubscription> {
-  final Stream<QuerySnapshot> _servicesStream =
-      FirebaseFirestore.instance.collection('services').orderBy("service", descending: false).snapshots();
+  final Stream<QuerySnapshot> _servicesStream = FirebaseFirestore.instance
+      .collection('services')
+      .orderBy("service", descending: false)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -36,62 +37,68 @@ class _AddSubscriptionState extends State<AddSubscription> {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
-          child: Container(
-        margin: EdgeInsets.all(30),
-        child: Column(
-          children: [
-            // TextField(
-            //   decoration: InputDecoration(
-            //     contentPadding: EdgeInsets.symmetric(vertical: 10),
-            //     prefixIcon: Icon(Icons.search),
-            //     prefixIconColor: Colors.grey[500],
-            //     border: OutlineInputBorder(),
-            //     hintText: "Search",
-            //     fillColor: Colors.grey[200],
-            //     filled: true,
-            //     enabledBorder: OutlineInputBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //       borderSide: BorderSide(width: 0, color: Colors.transparent),
-            //     ),
-            //     focusedBorder: OutlineInputBorder(
-            //       borderSide: BorderSide(
-            //         width: 0,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            SizedBox(height: 30),
-            StreamBuilder<QuerySnapshot>(
-              stream: _servicesStream,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Something went wrong');
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text('Loading...');
-                }
-
-                return ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    return SubscriptionAdditionItem(
-                      logo: "assets/logos/${data['logo']}.png",
-                      service: data['service'],
-                      serviceColor: Color(data['color']).withOpacity(1),
+        child: Container(
+          margin: EdgeInsets.all(30),
+          child: SingleChildScrollView(
+            clipBehavior: Clip.none,
+            child: Column(
+              children: [
+                // TextField(
+                //   decoration: InputDecoration(
+                //     contentPadding: EdgeInsets.symmetric(vertical: 10),
+                //     prefixIcon: Icon(Icons.search),
+                //     prefixIconColor: Colors.grey[500],
+                //     border: OutlineInputBorder(),
+                //     hintText: "Search",
+                //     fillColor: Colors.grey[200],
+                //     filled: true,
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(10),
+                //       borderSide: BorderSide(width: 0, color: Colors.transparent),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //         width: 0,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                StreamBuilder<QuerySnapshot>(
+                  stream: _servicesStream,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong');
+                    }
+          
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Text('Loading...');
+                    }
+          
+                    return ListView(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic> data =
+                            document.data()! as Map<String, dynamic>;
+                        return SubscriptionAdditionItem(
+                          logo: "assets/logos/${data['logo']}.png",
+                          service: data['service'],
+                          serviceColor: Color(data['color']).withOpacity(1),
+                        );
+                      }).toList(),
                     );
-                  }).toList(),
-                );
-              },
+                  },
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

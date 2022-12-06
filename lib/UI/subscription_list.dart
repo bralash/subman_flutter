@@ -37,15 +37,15 @@ class SubscriptionList extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        ...List.generate(
-          subscriptions.length,
-          (index) => SubscriptionItem(
-            logo: subscriptions[index]['logo'],
-            service: subscriptions[index]['service'],
-            cost: subscriptions[index]['cost'],
-            color: subscriptions[index]['color'],
-          ),
-        ),
+        // ...List.generate(
+        //   subscriptions.length,
+        //   (index) => SubscriptionItem(
+        //     logo: subscriptions[index]['logo'],
+        //     service: subscriptions[index]['service'],
+        //     cost: subscriptions[index]['cost'],
+        //     color: subscriptions[index]['color'],
+        //   ),
+        // ),
       ],
     );
   }

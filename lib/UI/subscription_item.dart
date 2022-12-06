@@ -7,12 +7,15 @@ class SubscriptionItem extends StatelessWidget {
     super.key,
     required this.logo,
     required this.service,
-    required this.cost, required this.color,
+    required this.cost,
+    required this.color,
+    required this.billDate,
   });
 
   final String logo, service;
   final Color color;
   final double cost;
+  final DateTime billDate;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class SubscriptionItem extends StatelessWidget {
                 ),
               ),
               Text(
-                "Next bill in 12 days",
+                "${DateTime.now().difference(billDate).inDays}",
                 style: TextStyle(
                   fontFamily: "SFPro",
                   fontWeight: FontWeight.normal,

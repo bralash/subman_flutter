@@ -87,7 +87,14 @@ flutter:
     - assets/logos/other.png
     - assets/logos/aws.png
     - assets/logos/aws_alt.png
-    - assets/logos/american-express.png
+    - assets/logos/american_express.png
+    - assets/logos/american_express_alt.png
+    - assets/logos/slack.png
+    - assets/logos/slack_alt.png
+    - assets/logos/playstation.png
+    - assets/logos/playstation_alt.png
+    - assets/logos/google_drive.png
+    - assets/logos/google_drive_alt.png
 
     - assets/settings/box.png
     - assets/settings/file.png

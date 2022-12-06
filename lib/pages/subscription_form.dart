@@ -32,14 +32,14 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
   void _saveSubscription() {
     FirebaseFirestore.instance.collection("subscriptions").add({
       "service": widget.service,
-      "logo": "assets/logos/${widget.service}.png",
+      "logo": widget.logo,
       "serviceColor": widget.serviceColor.value,
-      "cost": _costController.text,
-      "description": _descriptionController.text,
-      "billDate": _billDateController.text,
-      "category": _categoryController.text,
-      "cycle": _cycleController.text,
-      "reminder": _reminderController.text
+      "cost": _costController.text.trim(),
+      "description": _descriptionController.text.trim(),
+      "billDate": _billDateController.text.trim(),
+      "category": _categoryController.text.trim(),
+      "cycle": _cycleController.text.trim(),
+      "reminder": _reminderController.text.trim()
     });
 
     _costController.clear();
