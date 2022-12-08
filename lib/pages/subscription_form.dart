@@ -37,7 +37,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
       "cost": _costController.text.trim(),
       "description": _descriptionController.text.trim(),
       "billDate": _billDateController.text.trim(),
-      "category": _categoryController.text.trim(),
+      "category": dropdownValue,
       "cycle": _cycleController.text.trim(),
       "reminder": _reminderController.text.trim()
     });
@@ -52,6 +52,10 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Subscriptions()));
   }
+
+  String dropdownValue = "Music";
+
+  var categories = ['Music', 'Productivity', 'Education', 'Sports'];
 
   @override
   void initState() {
@@ -204,14 +208,13 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
                 },
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _categoryController,
+              DropdownButtonFormField(
                 decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 10),
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.circle),
-                  hintText: "No category",
+                  hintText: "Cycle",
                   hintStyle: TextStyle(color: kDarkGrey),
                   fillColor: kLightGrey,
                   filled: true,
@@ -225,6 +228,18 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
                     ),
                   ),
                 ),
+                hint: Text("Category"),
+                items: categories.map((String category) {
+                  return DropdownMenuItem(
+                    value: category,
+                    child: Text(category),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
               ),
               SizedBox(height: 10),
               TextField(
