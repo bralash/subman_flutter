@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:subman/pages/subscriptions.dart';
@@ -287,7 +288,37 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    
+                    showDialog(
+                      context: context,
+                      builder: (_) => CupertinoAlertDialog(
+                        title: Text("Delete?"),
+                        content:
+                            Text("Do you want to delete ${widget.service}"),
+                        actions: [
+                          CupertinoDialogAction(
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(color: kBlue),
+                            ),
+                            isDestructiveAction: true,
+                            onPressed: () {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop("Cancel");
+                            },
+                          ),
+                          CupertinoDialogAction(
+                            child: Text(
+                              "Delete",
+                              style: TextStyle(color: kRed),
+                            ),
+                            isDefaultAction: true,
+                            onPressed: () {
+                              _deleteSubscription();
+                            },
+                          ),
+                        ],
+                      ),
+                    );
                   },
                   child: Text('Delete Subscription'),
                   style: ElevatedButton.styleFrom(
