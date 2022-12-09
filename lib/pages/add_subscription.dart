@@ -14,7 +14,7 @@ class AddSubscription extends StatefulWidget {
 class _AddSubscriptionState extends State<AddSubscription> {
   final Stream<QuerySnapshot> _servicesStream = FirebaseFirestore.instance
       .collection('services')
-      .orderBy("service", descending: false)
+      .orderBy("_service", descending: false)
       .snapshots();
 
   @override
