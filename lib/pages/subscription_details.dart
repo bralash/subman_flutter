@@ -61,6 +61,14 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
         context, MaterialPageRoute(builder: (context) => Subscriptions()));
   }
 
+  String categoryValue = "Music";
+  String cycleValue = "Monthly";
+  String reminderValue = "No";
+
+  var categories = ['Music', 'Productivity', 'Education', 'Sports'];
+  var cycle = ["Monthly", 'Annually'];
+  var reminder = ["Yes", "No"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -215,14 +223,11 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                 },
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _categoryController,
+              DropdownButtonFormField(
                 decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.circle),
-                  hintText: "No category",
                   hintStyle: TextStyle(color: kDarkGrey),
                   fillColor: kLightGrey,
                   filled: true,
@@ -236,15 +241,59 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                     ),
                   ),
                 ),
+                hint: Text("Category"),
+                icon: Icon(Icons.keyboard_arrow_down),
+                items: categories.map((String category) {
+                  return DropdownMenuItem(
+                    value: category,
+                    child: Text(category),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    categoryValue = newValue!;
+                  });
+                },
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _cycleController,
+              DropdownButtonFormField(
                 decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.sync),
+                  hintStyle: TextStyle(color: kDarkGrey),
+                  fillColor: kLightGrey,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(width: 0, color: Colors.transparent),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 0,
+                    ),
+                  ),
+                ),
+                hint: Text("Cycle"),
+                icon: Icon(Icons.keyboard_arrow_down),
+                items: cycle.map((String category) {
+                  return DropdownMenuItem(
+                    value: category,
+                    child: Text(category),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    cycleValue = newValue!;
+                  });
+                },
+              ),
+              SizedBox(height: 10),
+              DropdownButtonFormField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.notifications),
                   hintText: "Cycle",
                   hintStyle: TextStyle(color: kDarkGrey),
                   fillColor: kLightGrey,
@@ -259,29 +308,19 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _reminderController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.notifications_outlined),
-                  hintText: "Reminder",
-                  hintStyle: TextStyle(color: kDarkGrey),
-                  fillColor: kLightGrey,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(width: 0, color: Colors.transparent),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 0,
-                    ),
-                  ),
-                ),
+                hint: Text("Reminder"),
+                icon: Icon(Icons.keyboard_arrow_down),
+                items: reminder.map((String category) {
+                  return DropdownMenuItem(
+                    value: category,
+                    child: Text(category),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    reminderValue = newValue!;
+                  });
+                },
               ),
               SizedBox(height: 50),
               SizedBox(
