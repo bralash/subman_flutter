@@ -33,7 +33,8 @@ class _SubscriptionsState extends State<Subscriptions> {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text(
-                    'Subscriptions',
+                    // 'Subscriptions',
+                    Color(0xFF000000).value.toString(),
                     style: TextStyle(
                       fontFamily: 'SFPro',
                       fontWeight: FontWeight.bold,

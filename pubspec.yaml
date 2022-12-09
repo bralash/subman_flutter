@@ -64,6 +64,8 @@ flutter:
     - assets/logos/playstation_alt.png
     - assets/logos/google_drive.png
     - assets/logos/google_drive_alt.png
+    - assets/logos/apple_one.png
+    - assets/logos/apple_one_alt.png
 
     - assets/settings/box.png
     - assets/settings/file.png
