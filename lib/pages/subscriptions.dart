@@ -131,8 +131,10 @@ class _SubscriptionsState extends State<Subscriptions> {
                           service: data['service'],
                           cost: double.parse(data['cost']),
                           color: Color(data['serviceColor']).withOpacity(1),
+                          cycle: data['cycle'],
                           billDate: DateFormat("yMMMd").parse(
                             data['billDate'],
+                            
                           ),
                         ),
                       );

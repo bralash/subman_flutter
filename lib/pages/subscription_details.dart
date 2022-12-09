@@ -287,7 +287,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    _deleteSubscription();
+                    
                   },
                   child: Text('Delete Subscription'),
                   style: ElevatedButton.styleFrom(

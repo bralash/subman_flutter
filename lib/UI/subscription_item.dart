@@ -9,17 +9,25 @@ class SubscriptionItem extends StatelessWidget {
     required this.service,
     required this.cost,
     required this.color,
-    required this.billDate,
+    required this.billDate, required this.cycle,
   });
 
-  final String logo, service;
+  final String logo, service, cycle;
   final Color color;
   final double cost;
   final DateTime billDate;
 
 
+
+
   @override
   Widget build(BuildContext context) {
+    var nextBillDate = 0;
+    if(cycle == "Monthly") {
+      nextBillDate = DateTime(billDate.year, billDate.month + 1, billDate.day).difference(DateTime.now()).inDays;
+    } else {
+      nextBillDate = DateTime(billDate.year + 1, billDate.month, billDate.day).difference(DateTime.now()).inDays;
+    }
     return Container(
       padding: EdgeInsets.symmetric(vertical: 17, horizontal: 14),
       margin: EdgeInsets.only(bottom: 10),
@@ -49,7 +57,7 @@ class SubscriptionItem extends StatelessWidget {
                 ),
               ),
               Text(
-                "Next bill date in ${DateTime(billDate.year, billDate.month + 1, billDate.day).difference(DateTime.now()).inDays} days",
+                "Next bill date in ${nextBillDate} days",
                 style: TextStyle(
                   fontFamily: "SFPro",
                   fontWeight: FontWeight.normal,
