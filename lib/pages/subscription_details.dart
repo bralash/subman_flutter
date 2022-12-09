@@ -51,14 +51,10 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
     _categoryController.text = widget.category;
     _reminderController.text = widget.reminder;
     _cycleController.text = widget.cycle;
+    categoryValue = widget.category;
+    cycleValue = widget.cycle;
+    reminderValue = widget.reminder;
     super.initState();
-  }
-
-  Future<void> _deleteSubscription() async {
-    final collection = FirebaseFirestore.instance.collection("subscriptions");
-    collection.doc(widget.id).delete();
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Subscriptions()));
   }
 
   String categoryValue = "Music";
@@ -68,6 +64,31 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
   var categories = ['Music', 'Productivity', 'Education', 'Sports'];
   var cycle = ["Monthly", 'Annually'];
   var reminder = ["Yes", "No"];
+
+  void _updateSubscription() {
+    var collection = FirebaseFirestore.instance.collection("subscriptions");
+    collection.doc(widget.id).update({
+      "service": widget.service,
+      "logo": widget.logo,
+      "serviceColor": widget.serviceColor.value,
+      "cost": _costController.text.trim(),
+      "description": _descriptionController.text.trim(),
+      "billDate": _billDateController.text.trim(),
+      "category": categoryValue,
+      "cycle": cycleValue,
+      "reminder": reminderValue
+    });
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Subscriptions()));
+  }
+
+  Future<void> _deleteSubscription() async {
+    final collection = FirebaseFirestore.instance.collection("subscriptions");
+    collection.doc(widget.id).delete();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Subscriptions()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +110,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
         actions: [
           TextButton(
             onPressed: () {
-              // _saveSubscription();
+              _updateSubscription();
             },
             child: Text(
               'Done',
@@ -241,7 +262,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                     ),
                   ),
                 ),
-                hint: Text("Category"),
+                hint: Text(widget.category),
                 icon: Icon(Icons.keyboard_arrow_down),
                 items: categories.map((String category) {
                   return DropdownMenuItem(
@@ -274,7 +295,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                     ),
                   ),
                 ),
-                hint: Text("Cycle"),
+                hint: Text(widget.cycle),
                 icon: Icon(Icons.keyboard_arrow_down),
                 items: cycle.map((String category) {
                   return DropdownMenuItem(
@@ -308,7 +329,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                     ),
                   ),
                 ),
-                hint: Text("Reminder"),
+                hint: Text(widget.reminder),
                 icon: Icon(Icons.keyboard_arrow_down),
                 items: reminder.map((String category) {
                   return DropdownMenuItem(
