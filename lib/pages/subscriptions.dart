@@ -23,6 +23,28 @@ class _SubscriptionsState extends State<Subscriptions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // bottomNavigationBar: BottomAppBar(
+      //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       Text(
+      //         "Average Expenses",
+      //         style: TextStyle(
+      //           fontFamily: "SFPro",
+      //           fontWeight: FontWeight.bold,
+      //         ),
+      //       ),
+      //       Text(
+      //         "\$50.00",
+      //         style: TextStyle(
+      //           fontFamily: "SFPro",
+      //           fontWeight: FontWeight.bold,
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 30, vertical: 60),
@@ -135,7 +157,6 @@ class _SubscriptionsState extends State<Subscriptions> {
                           cycle: data['cycle'],
                           billDate: DateFormat("yMMMd").parse(
                             data['billDate'],
-                            
                           ),
                         ),
                       );
