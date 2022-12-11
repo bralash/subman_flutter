@@ -66,6 +66,12 @@ flutter:
     - assets/logos/google_drive_alt.png
     - assets/logos/apple_one.png
     - assets/logos/apple_one_alt.png
+    - assets/logos/paetron.png
+    - assets/logos/paetron_alt.png
+    - assets/logos/amazon_prime.png
+    - assets/logos/amazon_prime_alt.png
+    - assets/logos/prime_video.png
+    - assets/logos/prime_video_alt.png
 
     - assets/settings/box.png
     - assets/settings/file.png
