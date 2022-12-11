@@ -15,7 +15,8 @@ class SettingsPage extends StatefulWidget {
 class _SettingsState extends State<SettingsPage> {
   Future<void> signout() async {
     AuthService().signOut();
-    Navigator.of(context, rootNavigator: true).pop(context);
+    // Navigator.of(context, rootNavigator: true).pop(context);
+    Navigator.popUntil(context, ModalRoute.withName("/"));
   }
 
   @override

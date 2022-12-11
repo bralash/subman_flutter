@@ -18,7 +18,7 @@ class SettingsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: border ? EdgeInsets.only(bottom: 16) : EdgeInsets.zero,
+      padding: border ? EdgeInsets.only(bottom: 12) : EdgeInsets.zero,
       decoration: BoxDecoration(
         border: border
             ? Border(
