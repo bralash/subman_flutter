@@ -61,7 +61,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
   String cycleValue = "Monthly";
   String reminderValue = "No";
 
-  var categories = ['Music', 'Productivity', 'Education', 'Sports'];
+  var categories = ['Education', 'Entertainment', 'Game', 'Lifestyle', 'Productivity', 'Social'];
   var cycle = ["Monthly", 'Annually'];
   var reminder = ["Yes", "No"];
 
